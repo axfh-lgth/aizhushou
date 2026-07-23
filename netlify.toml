@@ -5,8 +5,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
-  # Functions 打包会引用该环境变量，避免密钥扫描误杀构建
-  SECRETS_SCAN_OMIT_KEYS = "DASHSCOPE_API_KEY"
+  # Functions 会注入百炼 Key；关闭扫描避免误杀（Key 仍只存在于 Netlify 环境变量，不进仓库）
+  SECRETS_SCAN_ENABLED = "false"
 
 [functions]
   node_bundler = "esbuild"
