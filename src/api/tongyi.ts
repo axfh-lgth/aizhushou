@@ -29,7 +29,7 @@ export async function askTongyi(question: string): Promise<ChatAnswer> {
   }
 
   const footer = data.model
-    ? `\n\n---\n*由阿里云百炼（\`${data.model}\`）生成，请人工核对后再用于设计。*`
+    ? `\n\n---\n*由阿里云百炼（\`${data.model}\`）生成。*`
     : ''
 
   return {

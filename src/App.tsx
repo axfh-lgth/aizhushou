@@ -38,11 +38,9 @@ export default function App() {
       id: 'welcome',
       role: 'assistant',
       answer: {
-        markdown: `你好，我是 **研知** —— 海外产品开发知识助手。
+        markdown: `你好，我是研知 —— 海外产品开发知识助手。
 
-有知识库命中时，只按知识库作答并 **标明出处**；未收录时会说明，并仅给出模型解答（供参考，需人工核对）。也可切换到 **设计评审**。
-
-请先在项目根目录配置 \`.env\` 中的 \`DASHSCOPE_API_KEY\`。`,
+有知识库命中时，只按知识库作答并标明出处；未收录时会说明，并仅给出模型解答。也可切换到设计评审。`,
         sources: [],
         images: [],
       },
@@ -80,14 +78,11 @@ export default function App() {
           id: crypto.randomUUID(),
           role: 'assistant',
           answer: {
-            markdown: `**调用百炼失败**
+            markdown: `调用失败
 
 ${msg}
 
-请检查：
-1. 根目录 \`.env\` 是否配置了 \`DASHSCOPE_API_KEY\`
-2. 是否已重启 \`npm run dev\`
-3. 阿里云百炼账户是否有额度`,
+请稍后重试，或联系管理员检查服务配置。`,
             sources: [],
             images: [],
           },
@@ -174,7 +169,12 @@ ${msg}
                   ) : (
                     <>
                       <div className="md">
-                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          components={{
+                            strong: ({ children }) => <span>{children}</span>,
+                          }}
+                        >
                           {m.answer?.markdown ?? ''}
                         </ReactMarkdown>
                       </div>
@@ -207,7 +207,7 @@ ${msg}
                                     setMode('kb')
                                   }}
                                 >
-                                  <strong>{s.id}</strong>
+                                  <span className="src-id">{s.id}</span>
                                   <span>{s.title}</span>
                                   <em>{s.category}</em>
                                 </button>
@@ -225,7 +225,7 @@ ${msg}
                   <span />
                   <span />
                   <span />
-                  正在调用阿里云百炼…
+                  正在思考中…
                 </div>
               )}
             </div>
@@ -365,7 +365,6 @@ ${reviewItems
 
       <footer className="foot">
         <span>目标用户：开发人员 · 演示环境</span>
-        <span>答案需人工核对 · 错误容忍 ≤10%</span>
       </footer>
     </div>
   )
