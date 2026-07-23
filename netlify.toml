@@ -5,6 +5,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # Functions 打包会引用该环境变量，避免密钥扫描误杀构建
+  SECRETS_SCAN_OMIT_KEYS = "DASHSCOPE_API_KEY"
 
 [functions]
   node_bundler = "esbuild"

@@ -16,7 +16,7 @@ copy .env.example .env
 3. 编辑 `.env`：
 
 ```env
-DASHSCOPE_API_KEY=sk-你的密钥
+DASHSCOPE_API_KEY=你的百炼API密钥
 TONGYI_MODEL=qwen-plus
 ```
 
